@@ -4,7 +4,6 @@ namespace App\Events;
 
 use App\Entity\Invoice;
 use App\Repository\InvoiceRepository;
-use App\Events\InvoiceChronoSubscriber;
 use Symfony\Component\Security\Core\Security;
 use Symfony\Component\HttpKernel\KernelEvents;
 use ApiPlatform\Core\EventListener\EventPriorities;
