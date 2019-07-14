@@ -1,6 +1,7 @@
 import React, { useState, useContext } from "react";
 import AuthAPI from "../services/authAPI";
 import AuthContext from "../contexts/AuthContext";
+import Field from "../components/forms/Field";
 
 const LoginPage = ({ history }) => {
   const { setIsAuthenticated } = useContext(AuthContext);
@@ -37,35 +38,22 @@ const LoginPage = ({ history }) => {
       <h1>Connexion à l'application</h1>
 
       <form onSubmit={handleSubmit}>
-        <div className='form-group'>
-          <label htmlFor='username'>Adresse email</label>
-          <input
-            value={credentials.username}
-            onChange={handleChange}
-            type='email'
-            placeholder='Adresse email'
-            name='username'
-            id='username'
-            className={"form-control" + (error && " is-invalid")}
-          />
-          {error && (
-            <p className='invalid-feedback'>
-              Votre adresse mail ou mot de passe est incorrect.
-            </p>
-          )}
-        </div>
-        <div className='form-group'>
-          <label htmlFor='password'>Mot de passe</label>
-          <input
-            value={credentials.password}
-            onChange={handleChange}
-            type='password'
-            placeholder='Mot de passe'
-            name='password'
-            id='password'
-            className='form-control'
-          />
-        </div>
+        <Field
+          label='Adresse email'
+          name='username'
+          value={credentials.username}
+          onChange={handleChange}
+          placeholder='Adresse email'
+          error={error}
+        />
+        <Field
+          label='Mot de passe'
+          name='password'
+          value={credentials.password}
+          onChange={handleChange}
+          placeholder='Mot de passe'
+          error={error}
+        />
         <div className='form-group'>
           <button type='submit' className='btn btn-primary'>
             Connexion
