@@ -52,6 +52,7 @@ const LoginPage = ({ history }) => {
         <Field
           label='Mot de passe'
           name='password'
+          type='password'
           value={credentials.password}
           onChange={handleChange}
           placeholder='Mot de passe'
