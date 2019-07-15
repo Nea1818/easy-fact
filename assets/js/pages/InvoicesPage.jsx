@@ -31,9 +31,7 @@ const InvoicesPage = props => {
   // Récupération des Invoices auprès de l'API
   const fetchInvoices = async () => {
     try {
-      const data = await axios
-        .get("http://127.0.0.1:8000/api/invoices")
-        .then(response => response.data["hydra:member"]);
+      const data = await InvoicesAPI.findAll();
       setInvoices(data);
       setLoading(false);
     } catch (error) {
