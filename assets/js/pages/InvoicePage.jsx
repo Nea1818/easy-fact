@@ -107,8 +107,7 @@ const InvoicePage = ({ history, match }) => {
           <Field
             name='amount'
             type='number'
-            placeholder='Montant'
-            label='Montant'
+            placeholder='Taper un montant'
             onChange={handleChange}
             value={invoice.amount}
             error={errors.amount}
@@ -116,7 +115,6 @@ const InvoicePage = ({ history, match }) => {
 
           <Select
             name='customer'
-            label='Client'
             value={invoice.customer}
             error={errors.customer}
             onChange={handleChange}
@@ -129,7 +127,6 @@ const InvoicePage = ({ history, match }) => {
           </Select>
           <Select
             name='status'
-            label='Statut'
             value={invoice.status}
             error={errors.status}
             onChange={handleChange}

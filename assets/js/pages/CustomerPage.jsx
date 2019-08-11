@@ -95,7 +95,6 @@ const CustomerPage = ({ match, history }) => {
       {!loading && (
         <form onSubmit={handleSubmit}>
           <Field
-            label='Nom de famille'
             name='lastName'
             placeholder='Nom de famille'
             value={customer.lastName}
@@ -103,7 +102,6 @@ const CustomerPage = ({ match, history }) => {
             error={errors.lastName}
           />
           <Field
-            label='Prénom'
             name='firstName'
             placeholder='Prénom'
             value={customer.firstName}
@@ -111,7 +109,6 @@ const CustomerPage = ({ match, history }) => {
             error={errors.firstName}
           />
           <Field
-            label='Email'
             name='email'
             placeholder='Adresse email'
             type='email'
@@ -120,7 +117,6 @@ const CustomerPage = ({ match, history }) => {
             error={errors.email}
           />
           <Field
-            label='Entreprise'
             name='company'
             placeholder='Entreprise du client'
             value={customer.company}
