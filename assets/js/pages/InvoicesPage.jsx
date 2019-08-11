@@ -1,75 +1,75 @@
-import axios from "axios";
-import moment from "moment";
-import React, { useEffect, useState } from "react";
-import Pagination from "../components/Pagination";
-import InvoicesAPI from "../services/invoicesAPI";
-import { Link } from "react-router-dom";
-import { toast } from "react-toastify";
-import TableLoader from "../components/loaders/TableLoader";
+import axios from 'axios'
+import moment from 'moment'
+import React, { useEffect, useState } from 'react'
+import Pagination from '../components/Pagination'
+import InvoicesAPI from '../services/invoicesAPI'
+import { Link } from 'react-router-dom'
+import { toast } from 'react-toastify'
+import TableLoader from '../components/loaders/TableLoader'
 
 const STATUS_CLASSES = {
-  PAID: "success",
-  SENT: "info",
-  CANCELLED: "secondary"
-};
+  PAID: 'success',
+  SENT: 'info',
+  CANCELLED: 'secondary'
+}
 
 const STATUS_LABELS = {
-  PAID: "payé",
-  SENT: "envoyé",
-  CANCELLED: "annulé"
-};
+  PAID: 'payé',
+  SENT: 'envoyé',
+  CANCELLED: 'annulé'
+}
 
 const InvoicesPage = props => {
-  const [invoices, setInvoices] = useState([]);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [search, setSearch] = useState("");
+  const [invoices, setInvoices] = useState([])
+  const [currentPage, setCurrentPage] = useState(1)
+  const [search, setSearch] = useState('')
 
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(true)
 
-  const itemsPerPage = 6;
+  const itemsPerPage = 6
 
   // Récupération des Invoices auprès de l'API
   const fetchInvoices = async () => {
     try {
-      const data = await InvoicesAPI.findAll();
-      setInvoices(data);
-      setLoading(false);
+      const data = await InvoicesAPI.findAll()
+      setInvoices(data)
+      setLoading(false)
     } catch (error) {
-      toast.error("Une erreur est survenue lors du chargement des factures");
+      toast.error('Une erreur est survenue lors du chargement des factures')
     }
-  };
+  }
 
   // Récupérr les Invoices au chargement du composant
   useEffect(() => {
-    fetchInvoices();
-  }, []);
+    fetchInvoices()
+  }, [])
 
   // Gestion de la suppression d'une facture
   const handleDelete = async id => {
-    const originalInvoices = [...invoices];
+    const originalInvoices = [...invoices]
 
-    setInvoices(invoices.filter(invoice => invoice.id !== id));
+    setInvoices(invoices.filter(invoice => invoice.id !== id))
 
     try {
-      await InvoicesAPI.delete(id);
-      toast.success("La facture est bien supprimée");
+      await InvoicesAPI.delete(id)
+      toast.success('La facture est bien supprimée')
     } catch (error) {
-      toast.error("Une erreur est survenue");
-      setInvoices(originalInvoices);
+      toast.error('Une erreur est survenue')
+      setInvoices(originalInvoices)
     }
-  };
+  }
 
   // Gestion du changement de page
-  const handlePageChange = page => setCurrentPage(page);
+  const handlePageChange = page => setCurrentPage(page)
 
   // Gestion de la recherche
   const handleSearch = ({ currentTarget }) => {
-    setSearch(currentTarget.value);
-    setCurrentPage(1);
-  };
+    setSearch(currentTarget.value)
+    setCurrentPage(1)
+  }
 
   // Gestion du format de date
-  const formatDate = str => moment(str).format("DD/MM/YYYY");
+  const formatDate = str => moment(str).format('DD/MM/YYYY')
 
   // Filtrage des invoices en fonction de la recherche
   const filteredInvoices = invoices.filter(
@@ -78,22 +78,25 @@ const InvoicesPage = props => {
       i.customer.lastName.toLowerCase().includes(search.toLowerCase()) ||
       i.amount.toString().startsWith(search.toLowerCase()) ||
       STATUS_LABELS[i.status].toLowerCase().includes(search.toLowerCase())
-  );
+  )
 
   // Pagination des données
   const paginatedInvoices = Pagination.getData(
     filteredInvoices,
     currentPage,
     itemsPerPage
-  );
+  )
 
   return (
     <>
       <div className='d-flex justify-content-between align-items-center'>
-        <h1>Liste des Factures</h1>
-        <Link className='btn btn-primary' to='/invoices/new'>
-          Créer une facture
-        </Link>
+        <h1 className='my-3'>Liste des Factures</h1>
+        <div className='div'>
+          <Link to='/invoices/new' className='btn btn-primary mx-3'>
+            Créer une facture
+          </Link>
+          <Link to='/customers'>Accès aux clients</Link>
+        </div>
       </div>
 
       <div className='form-group'>
@@ -122,14 +125,14 @@ const InvoicesPage = props => {
               <tr key={invoice.id}>
                 <td>{invoice.chrono}</td>
                 <td>
-                  <Link to={"/customers/" + invoice.customer.id}>
+                  <Link to={'/customers/' + invoice.customer.id}>
                     {invoice.customer.firstName} {invoice.customer.lastName}
                   </Link>
                 </td>
                 <td className='text-center'>{formatDate(invoice.sentAt)}</td>
                 <td className='text-center'>
                   <span
-                    className={"badge badge-" + STATUS_CLASSES[invoice.status]}
+                    className={'badge badge-' + STATUS_CLASSES[invoice.status]}
                   >
                     {STATUS_LABELS[invoice.status]}
                   </span>
@@ -139,7 +142,7 @@ const InvoicesPage = props => {
                 </td>
                 <td>
                   <Link
-                    to={"/invoices/" + invoice.id}
+                    to={'/invoices/' + invoice.id}
                     className='btn btn-sm btn-secondary mx-2'
                   >
                     Editer
@@ -164,7 +167,7 @@ const InvoicesPage = props => {
         length={filteredInvoices.length}
       />
     </>
-  );
-};
+  )
+}
 
-export default InvoicesPage;
+export default InvoicesPage

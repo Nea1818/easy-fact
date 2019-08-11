@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react'
 
 const HomePage = props => {
   return (
@@ -6,22 +6,24 @@ const HomePage = props => {
       <div className='container'>
         <h1 className='display-3'>Gestion de factures</h1>
         <p className='lead my-3'>
-          Ce site a été crée pour faciliter la gestion administrative des
-          auto-entrepreneurs.
+          Cette API a été créee à partir d'une formation e-learning sur le site
+          Udemy. Les outils utilisés lors de ce tutoriel sont Symfony 4, API
+          Platform et React.
         </p>
         <hr className='my-4' />
-        <p>
-          Il associe le framework Symfony à une API Platform et une librairie
-          React pour une meilleure expérience utlisateur.
-        </p>
         <p className='lead my-2'>
-          <a className='btn btn-primary btn-lg' href='#' role='button'>
+          <a
+            className='btn btn-primary'
+            href='https://www.udemy.com/symfony-api-platform-react/'
+            target='_blank'
+            role='button'
+          >
             En savoir plus
           </a>
         </p>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default HomePage;
+export default HomePage
