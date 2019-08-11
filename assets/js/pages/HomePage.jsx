@@ -11,9 +11,8 @@ const HomePage = props => {
           Ci-dessous des identifiants de connexion d'un compte avec des données
           enregistrées:
         </p>
-        <h5 className='mt-5 mb-2'>Email: api@gmail.com</h5>
-        <h5 className='mb-5'> Mot de passe: api</h5>
-        <p className='lead'>Bonne visite!</p>
+        <p className='lead mt-4 mb-2'>EMAIL: api@gmail.com</p>
+        <p className='lead'> PASSWORD: api</p>
         <hr className='my-4' />
         <p className='lead my-2'>
           <a
