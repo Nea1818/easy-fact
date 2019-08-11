@@ -1,40 +1,42 @@
-import React, { useState, useContext } from "react";
-import AuthAPI from "../services/authAPI";
-import AuthContext from "../contexts/AuthContext";
-import Field from "../components/forms/Field";
-import { toast } from "react-toastify";
+import React, { useState, useContext } from 'react'
+import AuthAPI from '../services/authAPI'
+import AuthContext from '../contexts/AuthContext'
+import Field from '../components/forms/Field'
+import { toast } from 'react-toastify'
 
 const LoginPage = ({ history }) => {
-  const { setIsAuthenticated } = useContext(AuthContext);
+  const { setIsAuthenticated } = useContext(AuthContext)
   const [credentials, setCredentials] = useState({
-    username: "",
-    password: ""
-  });
+    username: '',
+    password: ''
+  })
 
-  const [error, setError] = useState("");
+  const [error, setError] = useState('')
 
   //Gestion des champs
   const handleChange = ({ currentTarget }) => {
-    const { value, name } = currentTarget;
+    const { value, name } = currentTarget
 
-    setCredentials({ ...credentials, [name]: value });
-  };
+    setCredentials({ ...credentials, [name]: value })
+  }
 
-  //Gestion du submit
+  // Gestion du submit
   const handleSubmit = async event => {
-    event.preventDefault();
+    event.preventDefault()
 
     try {
-      await AuthAPI.authenticate(credentials);
-      setError("");
-      setIsAuthenticated(true);
-      toast.success("Vous êtes désormais connecté");
-      history.replace("/customers");
+      await AuthAPI.authenticate(credentials)
+      setError('')
+      setIsAuthenticated(true)
+      toast.success('Vous êtes désormais connecté !')
+      history.replace('/customers')
     } catch (error) {
-      setError(" Votre adresse mail ou mot de passe est incorrect.");
-      toast.error("Une erreur est survenue");
+      setError(
+        'Aucun compte ne possède cette adresse email ou alors les informations ne correspondent pas !'
+      )
+      toast.error('Votre formulaire est mal renseigné')
     }
-  };
+  }
 
   return (
     <>
@@ -42,21 +44,19 @@ const LoginPage = ({ history }) => {
 
       <form onSubmit={handleSubmit}>
         <Field
-          label='Adresse email'
           name='username'
           value={credentials.username}
           onChange={handleChange}
-          placeholder='Adresse email'
+          placeholder='Adresse email de connexion'
           error={error}
         />
         <Field
-          label='Mot de passe'
           name='password'
           type='password'
           value={credentials.password}
           onChange={handleChange}
           placeholder='Mot de passe'
-          error={error}
+          error=''
         />
         <div className='form-group'>
           <button type='submit' className='btn btn-primary'>
@@ -65,7 +65,7 @@ const LoginPage = ({ history }) => {
         </div>
       </form>
     </>
-  );
-};
+  )
+}
 
-export default LoginPage;
+export default LoginPage
